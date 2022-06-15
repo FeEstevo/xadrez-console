@@ -1,5 +1,6 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 namespace xadrez_console
 {
@@ -19,7 +20,14 @@ namespace xadrez_console
                     }
                     else
                     {
-                        Console.Write("- ");
+                        if (i % 2.0 == 0 && j % 2.0 == 0 || i % 2 != 0 && j % 2 != 0)
+                        {
+                            Colorir("_ ", ConsoleColor.DarkGray);
+                        }
+                        else
+                        {
+                            Colorir("_ ", ConsoleColor.White);
+                        }
                     }
                 }
                 Console.WriteLine();
@@ -27,22 +35,34 @@ namespace xadrez_console
             Console.WriteLine("  A B C D E F G H");
         }
 
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + "");
+
+            return new PosicaoXadrez(coluna, linha);
+
+        }
+
         public static void ImprimirPeca(Peca peca)
         {
             if (peca.Cor == Cor.Branca)
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write(peca);
-                Console.ForegroundColor = aux;
+                Colorir(peca, ConsoleColor.Cyan);
             }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
-                Console.ForegroundColor = aux;
+                Colorir(peca, ConsoleColor.Yellow);
             }
+        }
+
+        private static void Colorir(object x, ConsoleColor consoleColor)
+        {
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = consoleColor;
+            Console.Write(x);
+            Console.ForegroundColor = aux;
         }
     }
 }
