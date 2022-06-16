@@ -16,7 +16,8 @@ namespace tabuleiro
             QtdMovimentos = 0;
         }
 
-        public void IncrementarQtdMovimentos() {
+        public void IncrementarQtdMovimentos()
+        {
             QtdMovimentos++;
         }
 
@@ -24,6 +25,25 @@ namespace tabuleiro
         {
             Peca p = Tab.Peca(Pos);
             return p == null || p.Cor != Cor;
+        }
+
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] mat = MovimentosPossiveis();
+            for (int i = 0; i < Tab.Linhas; i++)
+            {
+                for (int j = 0; j < Tab.Colunas; j++)
+                {
+                    if (mat[i, j])
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public bool PodeMoverPara(Posicao Pos)
+        {
+            return MovimentosPossiveis()[Pos.Linha, Pos.Coluna];
         }
 
         public abstract bool[,] MovimentosPossiveis();
