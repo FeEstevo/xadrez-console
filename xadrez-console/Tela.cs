@@ -22,13 +22,55 @@ namespace xadrez_console
                     {
                         if (i % 2.0 == 0 && j % 2.0 == 0 || i % 2 != 0 && j % 2 != 0)
                         {
-                            Colorir("_ ", ConsoleColor.DarkGray);
+                            Colorir("- ", ConsoleColor.DarkGray);
                         }
                         else
                         {
-                            Colorir("_ ", ConsoleColor.White);
+                            Colorir("- ", ConsoleColor.White);
                         }
                     }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  A B C D E F G H");
+        }
+
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
+        {
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            ConsoleColor fundoAlterado = ConsoleColor.DarkCyan;
+
+            for (int i = 0; i < tab.Linhas; i++)
+            {
+                Console.Write(8 - i + " ");
+                for (int j = 0; j < tab.Colunas; j++)
+                {
+                    if (posicoesPossiveis[i, j])
+                    {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+
+                    if (tab.Peca(i, j) != null)
+                    {
+                        ImprimirPeca(tab.Peca(i, j));
+                        Console.Write(" ");
+                    }
+                    else
+                    {
+                        if (i % 2.0 == 0 && j % 2.0 == 0 || i % 2 != 0 && j % 2 != 0)
+                        {
+                            Colorir("- ", ConsoleColor.DarkGray);
+                        }
+                        else
+                        {
+                            Colorir("- ", ConsoleColor.White);
+                        }
+                    }
+                    Console.BackgroundColor = fundoOriginal;
                 }
                 Console.WriteLine();
             }
