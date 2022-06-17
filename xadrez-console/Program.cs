@@ -15,13 +15,10 @@ namespace xadrez_console
 
                 while (!Partida.Terminada)
                 {
-                    Console.Clear();
-                    Tela.ImprimirTabuleiro(Partida.Tab);
                     try
                     {
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + Partida.Turno);
-                        Console.WriteLine("Jogam as " + Partida.JogadorAtual + "s");
+                        Console.Clear();
+                        Tela.ImprimirPartida(Partida);
 
                         Console.WriteLine();
                         Console.Write("Origem: ");
@@ -43,6 +40,11 @@ namespace xadrez_console
                     catch (TabuleiroException e)
                     {
                         Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Erro!");
                         Console.ReadLine();
                     }
                 }
