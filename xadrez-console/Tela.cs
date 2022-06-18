@@ -15,6 +15,10 @@ namespace xadrez_console
             Console.WriteLine();
             Console.WriteLine("Turno: " + Partida.Turno);
             Console.WriteLine("Jogam as " + Partida.JogadorAtual + "s");
+            if (Partida.Xeque)
+            {
+                Console.WriteLine("Xeque!");
+            }
         }
 
         public static void ImprimirPecasCapturadas(PartidaDeXadrez Partida)
@@ -28,9 +32,9 @@ namespace xadrez_console
             Console.WriteLine();
         }
 
-        public static void ImprimirConjunto(HashSet<Peca> pecas)
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
         {
-            foreach (Peca i in pecas)
+            foreach (Peca i in conjunto)
             {
                 if (i.Cor == Cor.Branca)
                 {

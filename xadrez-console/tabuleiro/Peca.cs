@@ -21,6 +21,11 @@ namespace tabuleiro
             QtdMovimentos++;
         }
 
+        public void DecrementarQtdMovimentos()
+        {
+            QtdMovimentos--;
+        }
+
         protected bool PodeMover(Posicao Pos)
         {
             Peca p = Tab.Peca(Pos);
