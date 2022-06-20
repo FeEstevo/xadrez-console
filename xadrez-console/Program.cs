@@ -8,7 +8,6 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
-
             try
             {
                 PartidaDeXadrez Partida = new PartidaDeXadrez();
@@ -17,7 +16,7 @@ namespace xadrez_console
                 {
                     try
                     {
-                        Console.Clear();
+                        Console.Clear();                        
                         Tela.ImprimirPartida(Partida);
 
                         Console.WriteLine();
@@ -48,6 +47,8 @@ namespace xadrez_console
                         Console.ReadLine();
                     }
                 }
+                Console.Clear();
+                Tela.ImprimirPartida(Partida);
             }
             catch (TabuleiroException e)
             {

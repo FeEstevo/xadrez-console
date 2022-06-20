@@ -4,7 +4,6 @@ namespace xadrez
 {
     class Torre : Peca
     {
-
         public Torre(Tabuleiro tab, Cor cor) : base(tab, cor) { }
 
         public override string ToString()
@@ -26,7 +25,7 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.Linha = pos.Linha - 1;
+                pos.Linha--;
             }
 
             // abaixo
@@ -38,7 +37,7 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.Linha = pos.Linha + 1;
+                pos.Linha++;
             }
 
             // direita
@@ -50,7 +49,7 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.Coluna = pos.Coluna + 1;
+                pos.Coluna++;
             }
 
             // esquerda
@@ -62,9 +61,8 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.Coluna = pos.Coluna - 1;
+                pos.Coluna--;
             }
-
             return mat;
         }
     }
