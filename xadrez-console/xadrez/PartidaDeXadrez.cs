@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using tabuleiro;
 
 namespace xadrez
@@ -142,6 +143,67 @@ namespace xadrez
                 throw new TabuleiroException("Você não pode se colocar em xeque");
             }
 
+            Peca p = Tab.Peca(destino);
+
+            // # jogada especial promocao
+            if (p is Peao)
+            {
+                if (p.Cor == Cor.Branca && destino.Linha == 0 || p.Cor == Cor.Preta && destino.Linha == 7)
+                {
+                    p = Tab.RetirarPeca(destino);
+                    Pecas.Remove(p);
+                    Console.WriteLine();
+                    Console.Write("Promoção, digite a peça (Q, N, R, B): ");
+                    char peca = char.Parse(Console.ReadLine());
+                    Console.WriteLine();
+                    Peca nova;
+                    switch (peca)
+                    {
+                        case 'Q':
+                            nova = new Dama(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                        case 'N':
+                            nova = new Cavalo(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                        case 'R':
+                            nova = new Torre(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                        case 'B':
+                            nova = new Bispo(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+
+                        case 'q':
+                            nova = new Dama(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                        case 'n':
+                            nova = new Cavalo(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                        case 'r':
+                            nova = new Torre(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                        case 'b':
+                            nova = new Bispo(Tab, p.Cor);
+                            Tab.ColocarPeca(nova, destino);
+                            Pecas.Add(nova);
+                            break;
+                    }
+                }
+            }
+
             if (EstaEmXeque(Adversaria(JogadorAtual)))
             {
                 Xeque = true;
@@ -160,8 +222,6 @@ namespace xadrez
                 Turno++;
                 MudaJogador();
             }
-
-            Peca p = Tab.Peca(destino);
 
             // # jogada especial en passant
             if (p is Peao && destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2)
