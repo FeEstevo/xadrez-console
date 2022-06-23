@@ -64,7 +64,7 @@ namespace xadrez
             if (p is Peao)
             {
                 if (origem.Coluna != destino.Coluna && PecaCapturada == null)
-                    {
+                {
                     Posicao posP;
                     if (p.Cor == Cor.Branca)
                     {
@@ -135,6 +135,30 @@ namespace xadrez
 
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
+            // # jogada especial roque pequeno
+            if (Tab.Peca(origem) is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Peca aux = ExecutaMovimento(origem, new Posicao(origem.Linha, origem.Coluna + 1));
+                if (EstaEmXeque(JogadorAtual))
+                {
+                    DesfazMovimento(origem, new Posicao(origem.Linha, origem.Coluna + 1), aux);
+                    throw new TabuleiroException("Você não pode se colocar em xeque");
+                }
+                DesfazMovimento(origem, new Posicao(origem.Linha, origem.Coluna + 1), aux);
+            }
+
+            // # jogada especial roque grande
+            if (Tab.Peca(origem) is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Peca aux = ExecutaMovimento(origem, new Posicao(origem.Linha, origem.Coluna - 1));
+                if (EstaEmXeque(JogadorAtual))
+                {
+                    DesfazMovimento(origem, new Posicao(origem.Linha, origem.Coluna - 1), aux);
+                    throw new TabuleiroException("Você não pode se colocar em xeque");
+                }
+                DesfazMovimento(origem, new Posicao(origem.Linha, origem.Coluna - 1), aux);
+            }
+
             Peca pecaCapturada = ExecutaMovimento(origem, destino);
 
             if (EstaEmXeque(JogadorAtual))
